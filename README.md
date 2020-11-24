@@ -2,7 +2,7 @@
 
 Anobe nukes all Adobe processes from orbit whenever you're done using them.
 
-A number of modern software vendors feel that because you are ~willing~ forced to pay rent for their now-industry-standard software, this entitles them to permanently hog your hardware without oversight or visibility.  It's only moderately savvy users who might ever notice that Adobe is unnecessarily running double-digit numbers of unique, non-trivial background processes at all times, either sending computer telemetry back to Adobe or simply leaking memory to absurd degrees during a soak of more than, say, 48 hours.
+A number of modern software vendors feel that because you are ~willing~ forced to pay rent for their now-industry-standard software, this entitles them to permanently hog your hardware without oversight or visibility.  It's only moderately savvy users who might ever notice that Adobe is unnecessarily running double-digit numbers of unique, non-trivial background processes at all times, either sending computer telemetry back themselves, or simply leaking memory to absurd degrees during a soak of more than, say, 48 hours.
 
 (I have personally caught the Adobe Desktop Service — basically the "do I need to update" poller — leaking over a gigabyte of memory after around four to five days of uptime).
 
@@ -27,3 +27,7 @@ for($i=1;$i -le 4;$i++){wmic process where "ExecutablePath like '%%Adobe%%'" cal
 ```
 
 It functions much the same as the macOS version, although it currently does not prevent startup items from being secretly set in the Scheduler.
+
+The `terminate` seemed to be missing two or three processes when run, but I discovered through testing that running it multiple times will eventually clear everything up — the sledgehammer approach to software management.
+
+When the `process` call spits out `No instances available`, you've won.  Three runs seems to be the charm at time of writing, so I've looped the command four times to guarantee Success™.  If you do not see `No instances available` toward the end of the output, simply run again.  _It will eradicate all eventually_.
