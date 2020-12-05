@@ -23,11 +23,11 @@ The script then loops through all open processes containing `adobe` in their fil
 Store this as a PowerShell function and run it from an elevated prompt.
 
 ```powershell
-for($i=1;$i -le 4;$i++){wmic process where "ExecutablePath like '%%Adobe%%'" call terminate}
+wmic process where "ExecutablePath like '%%Adobe%%'" call terminate
 ```
 
 It functions much the same as the macOS version, although it currently does not prevent startup items from being secretly set in the Scheduler.
 
 The `terminate` seemed to be missing two or three processes when run, but I discovered through testing that running it multiple times will eventually clear everything up — the sledgehammer approach to software management.
 
-When the `process` call spits out `No instances available`, you've won.  Three runs seems to be the charm at time of writing, so I've looped the command four times to guarantee Success™.  If you do not see `No instances available` toward the end of the output, simply run again.  _It will eradicate all eventually_.
+When the `process` call spits out `No instances available`, you've won. Three runs seems to be the charm at time of writing, but from time to time it takes more to guarantee Success™. If you do not see `No instances available` toward the end of the output, simply run again. _It will eradicate all eventually._
